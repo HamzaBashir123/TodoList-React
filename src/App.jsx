@@ -20,6 +20,8 @@ function App() {
   }
  },[todolist])
 
+ 
+
 
  function clearListHandler(){
   const confirm = window.confirm("Do you wnat to delete all the items in the list?")
@@ -49,10 +51,13 @@ function App() {
  
 const sortByPackedStatus = () => {
   const sortedList = [...todolist].sort((a, b) => {
+    console.log(a)
+    console.log(b)
     if (a.isPacked && !b.isPacked) return -1;
     if (!a.isPacked && b.isPacked) return 1;
     return 0;
   });
+  console.log(sortedList)
   setTodoList(sortedList);
   setSortBy('Sort By Packed Status'); // Update sorting option
 };
@@ -63,7 +68,9 @@ const sortByInputOrder = () => {
     // Extract numbers from text and compare them
     const numA = parseInt(a.item.split(' ')[0]);
     const numB = parseInt(b.item.split(' ')[0]);
+    
     return numA - numB;
+     
   });
   setTodoList(sortedList);
   setSortBy('Sort By input order'); // Update sorting option
@@ -72,11 +79,10 @@ const sortByInputOrder = () => {
 // Function to sort the list by description
 const sortByDescription = () => {
   const sortedList = [...todolist].sort((a, b) => {
-
-    console.log(a, '============> AAAAAAAA')
-    console.log(b, '============> BBBBBBBBBB')
     const keywordA = a.item.split(' ').slice(1).join(' ');
     const keywordB = b.item.split(' ').slice(1).join(' ');
+  
+
     return keywordA.localeCompare(keywordB);
   });
   setTodoList(sortedList);
